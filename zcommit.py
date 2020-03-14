@@ -258,6 +258,9 @@ any of the following optional key/value parameters:
                 sender = opts.get('sender', 'daemon.zcommit')
                 logger.debug('Set zsig')
                 for c in payload['commits']:
+                    if not c.get('distinct', True):
+                        # Skip commits that have already been pushed on another branch.
+                        continue
                     inst = opts.get('instance', c['id'][:8])
                     msg = format_commit(c, payload['repository']['commits_url'].replace('{/sha}', '/'+c['id']))
                     send_zephyr(sender, opts['class'], inst, zsig, msg)
