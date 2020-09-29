@@ -186,7 +186,7 @@ msg: %(msg)s
     #z.fields = [ zsig, msg ]
     #z.send()
     cmd = [ZWRITE, '-c', klass, '-i', instance,
-           '-s', zsig, '-d', '-x', 'UTF-8', '-m', msg]
+           '-s', zsig, '-d', '-x', 'UTF-8', '-O', 'auto', '-m', msg]
     output = subprocess.check_output([p.encode('utf-8') for p in cmd])
 
 class Application(object):
